@@ -1,8 +1,11 @@
 # -----------------------------------
 # Set up prompt environment variable
 # -----------------------------------
-PROMPT="%F{cyan}%~%f$(build_git_prompt) %% "
-RPROMPT=' %DT%D{%H:%M:%S}'
+function promptcmd {
+    PROMPT="%F{cyan}%~%f$(build_git_prompt) %% "
+    RPROMPT=' %DT%D{%H:%M:%S}'
+}
+precmd_functions=(promptcmd)
 
 # -----------------------------------
 # FUNCTIONS
