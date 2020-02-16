@@ -1,9 +1,9 @@
 # -----------------------------------
 # Set up prompt environment variable
 # -----------------------------------
+RPROMPT=' %DT%D{%H:%M:%S}'
 function promptcmd {
     PROMPT="%F{cyan}%~%f$(build_git_prompt) %% "
-    RPROMPT=' %DT%D{%H:%M:%S}'
 }
 precmd_functions=(promptcmd)
 
@@ -42,38 +42,29 @@ function build_git_prompt {
        deleted_count=$(git_deleted_count);
        untracked_count=$(git_untracked_count);
 
-       # Set up colors
-       # See http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
-       color_main="\e[1;35m";
-       color_mod="\e[1;36m";
-       color_added="\e[1;32m";
-       color_deleted="\e[1;31m";
-       color_untracked="\e[1;33m";
-       color_reset="\e[0m";
-
        # Build the result string
        result=
 
        # Add the modified file count to the result string
        if [ "${mod_count}" != "0" ]; then
-           result=" ${color_mod}*${mod_count}"
+           result=" %F{cyan}*${mod_count}%f"
        fi
 
        # Add the added file count to the result string
        if [ "${added_count}" != "0" ]; then
-           result="${result} ${color_added}+${added_count}"
+           result="${result} %F{green}+${added_count}%f"
        fi
 
        # Add the deleted file count to the result string
        if [ "${deleted_count}" != "0" ]; then
-           result="${result} ${color_deleted}-${deleted_count}"
+           result="${result} %F{red}-${deleted_count}%f"
        fi
 
        # Add the untracked file count to the result string
        if [ "${untracked_count}" != 0 ]; then
-           result="${result} ${color_untracked}~${untracked_count}"
+           result="${result} %F{yellow}~${untracked_count}%f"
        fi
 
-       echo -e " (${color_main}${branch_name}${result}${color_reset})";
+       echo -e " (%F{magenta}${branch_name}%f${result})";
    fi
 }
