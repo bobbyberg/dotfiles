@@ -8,6 +8,11 @@ function promptcmd {
 precmd_functions=(promptcmd)
 
 # -----------------------------------
+# OPTIONS
+# -----------------------------------
+setopt interactive_comments
+
+# -----------------------------------
 # FUNCTIONS
 # -----------------------------------
 function git_branch {
